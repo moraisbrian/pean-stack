@@ -1,7 +1,7 @@
 import { ProductService } from "../../application/services/productService";
 import { Request, Response } from "express";
-import { ProductDto } from "../../application/dtos/productDto";
 import { injectable } from "tsyringe";
+import { Product } from "../../domain/entities/product";
 
 @injectable()
 export class ProductController {
@@ -12,7 +12,11 @@ export class ProductController {
 
     async add(req: Request, res: Response): Promise<void> {
         try {
-            const product = new ProductDto();
+            if (!req.body.description || !req.body.amount || !req.body.unitPrice) {
+                throw new Error('Dados do produto inválidos');
+            }
+
+            const product = new Product();
             product.Description = req.body.description;
             product.UnitPrice = req.body.unitPrice;
             product.Amount = req.body.amount;
@@ -45,6 +49,10 @@ export class ProductController {
 
     async delete(req: Request, res: Response): Promise<void> {
         try {
+            if (!req.params.id) {
+                throw new Error('Id inválido');
+            }
+
             const id = req.params.id;
             const rowsAffected = await this.productService.delete(id);
             res.status(200).json(rowsAffected);
@@ -55,7 +63,11 @@ export class ProductController {
 
     async update(req: Request, res: Response): Promise<void> {
         try {
-            const product = new ProductDto();
+            if (!req.body.id || !req.body.description || !req.body.amount || !req.body.unitPrice) {
+                throw new Error('Dados do produto inválidos');
+            }
+
+            const product = new Product();
             product.Id = req.body.id;
             product.Description = req.body.description;
             product.UnitPrice = req.body.unitPrice;

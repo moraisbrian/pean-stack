@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { SellService } from "../../application/services/sellService";
 import { Request, Response } from "express";
-import { SellProductDto } from "../../application/dtos/sellProductDto";
+import { SellProduct } from "../../domain/entities/sellProduct";
 
 @injectable()
 export class SellController {
@@ -10,22 +10,36 @@ export class SellController {
         this.sellService = sellService;
     }
 
-    async add(req: Request, res: Response): Promise<void> {
+    async sell(req: Request, res: Response): Promise<void> {
         try {
             const sellProducts = req.body.sellProducts;
-            const products: SellProductDto[] = [];
+            const products: SellProduct[] = [];
 
             for (let i = 0; i < sellProducts.length; i++) {
-                const toAdd = new SellProductDto();
-                toAdd.Amount = sellProducts[i].amount;
-                toAdd.UnitPrice = sellProducts[i].unitPrice;
-                toAdd.ProductId = sellProducts[i].productId;
+                if (!sellProducts[i].amount || !sellProducts[i].unitPrice || !sellProducts[i].productId) {
+                    throw new Error('Dados inválidos');
+                }
 
-                products.push(toAdd);
+                const product = new SellProduct();
+                product.Amount = sellProducts[i].amount;
+                product.UnitPrice = sellProducts[i].unitPrice;
+                product.ProductId = sellProducts[i].productId;
+
+                products.push(product);
             }
 
-            const inserted = await this.sellService.add(products);
+            const inserted = await this.sellService.sell(products);
             res.status(200).json(inserted)
+        } catch (error) {
+            console.log(error);
+            res.status(400).json(error);
+        }
+    }
+
+    async findAll(req: Request, res: Response): Promise<void> {
+        try {
+            const sells = await this.sellService.findAll();
+            res.status(200).json(sells);
         } catch (error) {
             res.status(400).json(error);
         }

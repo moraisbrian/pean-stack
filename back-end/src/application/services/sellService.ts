@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { SellRepository } from "../../data/repositories/sellRepository";
+import { Sell } from "../../domain/entities/sell";
 import { SellProduct } from "../../domain/entities/sellProduct";
-import { SellProductDto } from "../dtos/sellProductDto";
 
 @injectable()
 export class SellService {
@@ -10,21 +10,11 @@ export class SellService {
         this.sellRepository = sellRepository;
     }
 
-    async add(productsDto: SellProductDto[]): Promise<string | unknown> {
-        const products: SellProduct[] = [];
-        for (let i = 0; i < productsDto.length; i++) {
-            if (!productsDto[i].isValid()) {
-                throw new Error('Dados inválidos');
-            }
+    async sell(products: SellProduct[]): Promise<string | unknown> {
+        return await this.sellRepository.sell(products);
+    }
 
-            const product = new SellProduct();
-            product.ProductId = productsDto[i].ProductId!;
-            product.Amount = productsDto[i].Amount!;
-            product.UnitPrice = productsDto[i].UnitPrice!;
-
-            products.push(product);
-        }
-
-        return await this.sellRepository.add(products);
+    async findAll(): Promise<Sell[]> {
+        return await this.sellRepository.findAll();
     }
 }

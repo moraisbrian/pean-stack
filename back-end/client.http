@@ -15,11 +15,11 @@ GET {{baseUrl}}/products HTTP/1.1
 
 ###
 
-GET {{baseUrl}}/products/fa16bc3c-6763-487d-805e-7084aaef2e95 HTTP/1.1
+GET {{baseUrl}}/products/278e0c0a-8264-43c0-bda4-4c94f795a999 HTTP/1.1
 
 ###
 
-DELETE {{baseUrl}}/products/fa16bc3c-6763-487d-805e-7084aaef2e95 HTTP/1.1
+DELETE {{baseUrl}}/products/278e0c0a-8264-43c0-bda4-4c94f795a999 HTTP/1.1
 
 ###
 
@@ -42,13 +42,22 @@ Content-Type: application/json
     "sellProducts": [
         {
             "productId": "7d8aa35c-a8d7-4fae-9630-67f87e9951e2",
-            "amount": 5,
+            "amount": 20,
             "unitPrice": 1
         },
         {
             "productId": "58230986-c5fb-472e-bd20-a0b6b8b87cfb",
             "amount": 1,
             "unitPrice": 15
+        },
+        {
+            "productId": "278e0c0a-8264-43c0-bda4-4c94f795a999",
+            "amount": 1,
+            "unitPrice": 10
         }
     ]
 }
+
+###
+
+GET {{baseUrl}}/sells HTTP/1.1

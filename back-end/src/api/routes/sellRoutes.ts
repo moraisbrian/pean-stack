@@ -13,6 +13,7 @@ export class SellRoutes {
     }
 
     private setRoutes(): void {
-        this.router.post('/api/sells', async (req: Request, res: Response) => await this.sellController.add(req, res));
+        this.router.post('/api/sells', async (req: Request, res: Response) => await this.sellController.sell(req, res));
+        this.router.get('/api/sells', async (req: Request, res: Response) => await this.sellController.findAll(req, res));
     }
 }
