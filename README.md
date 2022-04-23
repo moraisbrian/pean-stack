@@ -1,6 +1,6 @@
 # PEAN-Stack
 
-- [x] PostgreSQL
-- [x] Express
-- [ ] Angular
-- [x] Node.js
+- PostgreSQL
+- Express
+- Angular
+- Node.js
