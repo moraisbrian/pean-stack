@@ -1,6 +1,7 @@
 import express, { Application, json, urlencoded, Request, Response, NextFunction } from 'express';
 import { injectable } from 'tsyringe';
 import { Routes } from './routes/routes';
+import { allowCors } from './middlewares/allowCors'
 
 @injectable()
 export class Server {
@@ -16,13 +17,7 @@ export class Server {
 	private setMiddlewares(): void {
 		this.app.use(json());
 		this.app.use(urlencoded({ extended: false }));
-
-		this.app.use((req: Request, res: Response, next: NextFunction) => {
-			res.header('Access-Control-Allow-Origin', '*');
-			res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-			res.header('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept');
-			next();
-		});
+		this.app.use(allowCors);
 	}
 
 	private setRoutes(): void {
