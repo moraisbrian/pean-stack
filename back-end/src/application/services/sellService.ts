@@ -1,7 +1,8 @@
 import { injectable } from "tsyringe";
 import { SellRepository } from "../../data/repositories/sellRepository";
-import { Sell } from "../../domain/entities/sell";
 import { SellProduct } from "../../domain/entities/sellProduct";
+import { SellDto } from "../dtos/sellDto";
+import { SellProductDto } from "../dtos/sellProductDto";
 
 @injectable()
 export class SellService {
@@ -10,11 +11,22 @@ export class SellService {
         this.sellRepository = sellRepository;
     }
 
-    async sell(products: SellProduct[]): Promise<string | unknown> {
-        return await this.sellRepository.sell(products);
+    async sell(products: SellProductDto[]): Promise<string | unknown> {
+        const sellProducts: SellProduct[] = [];
+        for (let i = 0; i < products.length; i++) {
+
+            const sellProduct = new SellProduct();
+            sellProduct.Amount = products[i].Amount!;
+            sellProduct.UnitPrice = products[i].UnitPrice!;
+            sellProduct.ProductId = products[i].ProductId!;
+
+            sellProducts.push(sellProduct);
+        }
+
+        return await this.sellRepository.sell(sellProducts);
     }
 
-    async findAll(): Promise<Sell[]> {
+    async findAll(): Promise<SellDto[]> {
         return await this.sellRepository.findAll();
     }
 }

@@ -1,7 +1,7 @@
 import { ProductService } from "../../application/services/productService";
 import { Request, Response } from "express";
 import { injectable } from "tsyringe";
-import { Product } from "../../domain/entities/product";
+import { ProductDto } from "../../application/dtos/productDto";
 
 @injectable()
 export class ProductController {
@@ -12,14 +12,14 @@ export class ProductController {
 
     async add(req: Request, res: Response): Promise<void> {
         try {
-            if (!req.body.description || !req.body.amount || !req.body.unitPrice) {
-                throw new Error('Dados do produto inválidos');
+            if (!req.body.Description || !req.body.Amount || !req.body.UnitPrice) {
+                throw 'Dados do produto inválidos';
             }
 
-            const product = new Product();
-            product.Description = req.body.description;
-            product.UnitPrice = req.body.unitPrice;
-            product.Amount = req.body.amount;
+            const product = new ProductDto();
+            product.Description = req.body.Description;
+            product.UnitPrice = req.body.UnitPrice;
+            product.Amount = req.body.Amount;
 
             const inserted = await this.productService.add(product);
             res.status(201).json(inserted);
@@ -50,7 +50,7 @@ export class ProductController {
     async delete(req: Request, res: Response): Promise<void> {
         try {
             if (!req.params.id) {
-                throw new Error('Id inválido');
+                throw 'Id inválido';
             }
 
             const id = req.params.id;
@@ -63,15 +63,15 @@ export class ProductController {
 
     async update(req: Request, res: Response): Promise<void> {
         try {
-            if (!req.body.id || !req.body.description || !req.body.amount || !req.body.unitPrice) {
-                throw new Error('Dados do produto inválidos');
+            if (!req.body.Id || !req.body.Description || !req.body.Amount || !req.body.UnitPrice) {
+                throw 'Dados do produto inválidos';
             }
 
-            const product = new Product();
-            product.Id = req.body.id;
-            product.Description = req.body.description;
-            product.UnitPrice = req.body.unitPrice;
-            product.Amount = req.body.amount;
+            const product = new ProductDto();
+            product.Id = req.body.Id;
+            product.Description = req.body.Description;
+            product.UnitPrice = req.body.UnitPrice;
+            product.Amount = req.body.Amount;
 
             const updated = await this.productService.update(product);
             res.status(200).json(updated);

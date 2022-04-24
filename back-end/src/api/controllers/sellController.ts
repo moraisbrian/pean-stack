@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { SellService } from "../../application/services/sellService";
 import { Request, Response } from "express";
-import { SellProduct } from "../../domain/entities/sellProduct";
+import { SellProductDto } from "../../application/dtos/sellProductDto";
 
 @injectable()
 export class SellController {
@@ -12,18 +12,18 @@ export class SellController {
 
     async sell(req: Request, res: Response): Promise<void> {
         try {
-            const sellProducts = req.body.sellProducts;
-            const products: SellProduct[] = [];
+            const sellProducts = req.body.SellProducts;
+            const products: SellProductDto[] = [];
 
             for (let i = 0; i < sellProducts.length; i++) {
-                if (!sellProducts[i].amount || !sellProducts[i].unitPrice || !sellProducts[i].productId) {
-                    throw new Error('Dados inválidos');
+                if (!sellProducts[i].Amount || !sellProducts[i].UnitPrice || !sellProducts[i].ProductId) {
+                    throw 'Dados inválidos';
                 }
 
-                const product = new SellProduct();
-                product.Amount = sellProducts[i].amount;
-                product.UnitPrice = sellProducts[i].unitPrice;
-                product.ProductId = sellProducts[i].productId;
+                const product = new SellProductDto();
+                product.Amount = sellProducts[i].Amount;
+                product.UnitPrice = sellProducts[i].UnitPrice;
+                product.ProductId = sellProducts[i].ProductId;
 
                 products.push(product);
             }

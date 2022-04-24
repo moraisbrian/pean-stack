@@ -4,9 +4,9 @@ POST {{baseUrl}}/products HTTP/1.1
 Content-Type: application/json
 
 {
-    "description": "Alicate",
-    "unitPrice": 15,
-    "amount": 50
+    "Description": "Arame",
+    "UnitPrice": 5,
+    "Amount": 1000
 }
 
 ###
@@ -15,11 +15,11 @@ GET {{baseUrl}}/products HTTP/1.1
 
 ###
 
-GET {{baseUrl}}/products/278e0c0a-8264-43c0-bda4-4c94f795a999 HTTP/1.1
+GET {{baseUrl}}/products/636f7126-b77f-43b9-9888-866cf192737c HTTP/1.1
 
 ###
 
-DELETE {{baseUrl}}/products/278e0c0a-8264-43c0-bda4-4c94f795a999 HTTP/1.1
+DELETE {{baseUrl}}/products/d025d8eb-016d-4720-b4bb-803dd77a7e24 HTTP/1.1
 
 ###
 
@@ -27,10 +27,10 @@ PUT {{baseUrl}}/products HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": "e9a6e8ef-5fbb-428b-931d-599d7ec8d44b",
-    "description": "Parafuso",
-    "unitPrice": 1.50,
-    "amount": 500
+    "Id": "42e06024-10ef-4cf8-869b-a85f16589c54",
+    "Description": "Prego Pequeno",
+    "UnitPrice": 1,
+    "Amount": 1000
 }
 
 ###
@@ -39,21 +39,21 @@ POST {{baseUrl}}/sells HTTP/1.1
 Content-Type: application/json
 
 {
-    "sellProducts": [
+    "SellProducts": [
         {
-            "productId": "7d8aa35c-a8d7-4fae-9630-67f87e9951e2",
-            "amount": 20,
-            "unitPrice": 1
+            "ProductId": "7d8aa35c-a8d7-4fae-9630-67f87e9951e2",
+            "Amount": 20,
+            "UnitPrice": 1
         },
         {
-            "productId": "58230986-c5fb-472e-bd20-a0b6b8b87cfb",
-            "amount": 1,
-            "unitPrice": 15
+            "ProductId": "58230986-c5fb-472e-bd20-a0b6b8b87cfb",
+            "Amount": 1,
+            "UnitPrice": 15
         },
         {
-            "productId": "278e0c0a-8264-43c0-bda4-4c94f795a999",
-            "amount": 1,
-            "unitPrice": 10
+            "ProductId": "278e0c0a-8264-43c0-bda4-4c94f795a999",
+            "Amount": 1,
+            "UnitPrice": 10
         }
     ]
 }

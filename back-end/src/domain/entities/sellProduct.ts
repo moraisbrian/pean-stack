@@ -26,11 +26,11 @@ export class SellProduct extends Model<SellProduct, SellProductCreationAttribute
 
     @Column
     @ForeignKey(() => Product)
-    ProductId!: string;
+    declare ProductId: string;
 
     @Column
     @ForeignKey(() => Sell)
-    SellId!: string;
+    declare SellId: string;
 
     @Column
     declare Amount: number;
