@@ -13,7 +13,7 @@ export class QuestionDialogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.showModal.subscribe((result: boolean) => {
       if (result) {
-        this.btnModal?.nativeElement.click();
+        this.btnQuestionModal?.nativeElement.click();
       }
     });
   }
@@ -26,12 +26,12 @@ export class QuestionDialogComponent implements OnInit, OnDestroy {
   @Input() title?: string;
   @Input() content?: string;
   @Input() showModal: Subject<boolean> = new Subject<boolean>();
-  @ViewChild('btnModal', { static: true }) btnModal?: ElementRef;
-  @ViewChild('btnClose', { static: true }) btnClose?: ElementRef;
+  @ViewChild('btnQuestionModal', { static: true }) btnQuestionModal?: ElementRef;
+  @ViewChild('btnQuestionClose', { static: true }) btnQuestionClose?: ElementRef;
   @Output() confirmAction: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   onYesClick(): void {
     this.confirmAction.emit(true);
-    this.btnClose?.nativeElement.click();
+    this.btnQuestionClose?.nativeElement.click();
   }
 }

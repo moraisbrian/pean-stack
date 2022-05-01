@@ -8,7 +8,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "Description": "Arame",
+    "Description": "Teste",
     "UnitPrice": 5,
     "Amount": 1000
 }

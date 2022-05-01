@@ -1,16 +1,16 @@
-<button hidden #btnModal type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<button hidden #btnQuestionModal type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#questionModal"></button>
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
+                <h5 class="modal-title" id="questionModalLabel">{{ title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{ content }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #btnClose>Não</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #btnQuestionClose>Não</button>
                 <button type="button" class="btn btn-primary" (click)="onYesClick()">Sim</button>
             </div>
         </div>

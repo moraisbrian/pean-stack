@@ -13,7 +13,7 @@ export class InformationDialogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.showModal.subscribe((result: boolean) => {
       if (result) {
-        this.btnModal?.nativeElement.click();
+        this.btnInfoModal?.nativeElement.click();
       }
     });
   }
@@ -26,5 +26,5 @@ export class InformationDialogComponent implements OnInit, OnDestroy {
   @Input() title?: string;
   @Input() content?: string;
   @Input() showModal: Subject<boolean> = new Subject<boolean>();
-  @ViewChild('btnModal', { static: true }) btnModal?: ElementRef;
+  @ViewChild('btnInfoModal', { static: true }) btnInfoModal?: ElementRef;
 }

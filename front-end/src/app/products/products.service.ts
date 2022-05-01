@@ -20,4 +20,8 @@ export class ProductsService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.baseUrl}/products`, this.httpOptions);
   }
+
+  deleteProduct(id: string): Observable<number> {
+    return this.http.delete<number>(`${environment.baseUrl}/products/${id}`, this.httpOptions)
+  }
 }
