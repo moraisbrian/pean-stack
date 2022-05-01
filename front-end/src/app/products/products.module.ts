@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsComponent } from './products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsService } from './products.service';
+import { DialogModule } from '../dialog/dialog.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { ProductsService } from './products.service';
   ],
   imports: [
     ProductsRoutingModule,
-    CommonModule
+    CommonModule,
+    DialogModule
   ],
   providers: [
     ProductsService
