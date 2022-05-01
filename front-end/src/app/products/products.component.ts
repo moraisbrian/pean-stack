@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
-import jwt_decode from "jwt-decode";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Product } from '../models/product.model';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService) { }
+  constructor(private productsService: ProductsService) { }
+
+  products$: Observable<Product[]> = new Observable<Product[]>();
 
   ngOnInit(): void {
-    const payload = jwt_decode(this.authService.token)
-    console.log(payload);
+    this.products$ = this.productsService.getProducts();
+  }
+
+  ngOnDestroy(): void {
   }
 
 }
