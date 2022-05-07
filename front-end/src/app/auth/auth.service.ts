@@ -24,16 +24,11 @@ export class AuthService {
         }
       }
     }
-    this.removeInvalidToken();
+    this.logout();
     return false;
   }
 
   logout(): void {
-    this.token = '';
-    localStorage.removeItem('token');
-  }
-
-  private removeInvalidToken(): void {
     this.token = '';
   }
 
