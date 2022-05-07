@@ -23,10 +23,14 @@ export class AuthService {
           return true;
         }
       }
-      
     }
     this.removeInvalidToken();
     return false;
+  }
+
+  logout(): void {
+    this.token = '';
+    localStorage.removeItem('token');
   }
 
   private removeInvalidToken(): void {
