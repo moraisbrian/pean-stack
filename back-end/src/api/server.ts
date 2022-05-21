@@ -1,4 +1,4 @@
-import express, { Application, json, urlencoded, Request, Response, NextFunction } from 'express';
+import express, { Application, json, urlencoded } from 'express';
 import { injectable } from 'tsyringe';
 import { Routes } from './routes/routes';
 import { allowCors } from './middlewares/allowCors'
