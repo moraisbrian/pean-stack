@@ -1,5 +1,7 @@
 <app-information-dialog title="Atenção" [showModal]="showInformationModal" [content]="infoMessage"></app-information-dialog>
 <app-question-dialog title="Atenção" content="Deseja realmente deletar o produto?" [showModal]="showQuestionModal" (confirmAction)="confirmDelete($event)"></app-question-dialog>
+<h1>Produtos</h1>
+<hr>
 <button class="btn btn-primary" (click)="addProduct()">Adicionar</button>
 <hr>
 <table class="table">
@@ -19,7 +21,7 @@
             <td>{{ product.UnitPrice | currency:'BRL' }}</td>
             <td>{{ product.Amount }}</td>
             <td>
-                <button class="btn btn-warning" [value]="product.Id" (click)="editProduct($event)">Editar</button>
+                <a class="btn btn-warning" [routerLink]="['update', product.Id]" [queryParams]="{ description: product.Description, unitPrice: product.UnitPrice, amount: product.Amount }">Editar</a> 
                 <button class="btn btn-danger" [value]="product.Id" (click)="deleteProduct($event)">Deletar</button>
             </td>
         </tr>

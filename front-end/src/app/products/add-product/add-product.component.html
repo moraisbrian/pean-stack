@@ -1,3 +1,18 @@
-<p>add-product works!</p>
+<h1>Produto</h1>
+<hr>
 
-<p>{{ id }}</p>
+<form [formGroup]="productForm" (ngSubmit)="submitForm()">
+    <div class="mb-3">
+        <label for="description" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="description" formControlName="description">
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Quantidade Estoque</label>
+        <input type="text" class="form-control" id="amount" formControlName="amount">
+    </div>
+    <div class="mb-3">
+        <label for="unitPrice" class="form-label">Preço Unitário</label>
+        <input type="text" class="form-control" id="unitPrice" formControlName="unitPrice">
+    </div>
+    <button type="submit" [disabled]="!productForm.valid" class="btn btn-primary">Salvar</button>
+</form>

@@ -24,4 +24,12 @@ export class ProductsService {
   deleteProduct(id: string): Observable<number> {
     return this.http.delete<number>(`${environment.baseUrl}/products/${id}`, this.httpOptions)
   }
+
+  updateProduct(product: Product): Observable<number> {
+    return this.http.put<number>(`${environment.baseUrl}/products`, JSON.stringify(product), this.httpOptions);
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${environment.baseUrl}/products`, JSON.stringify(product), this.httpOptions);
+  }
 }

@@ -1,21 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/product.model';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private productService: ProductsService, private router: Router) { }
 
-  id: string = '';
+  product: Product = new Product();
+  subscription: Subscription = new Subscription();
+
+  productForm!: FormGroup;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.id = id;
+      this.subscription.add(this.route.queryParams.subscribe(params => {
+        this.productForm = new FormGroup({
+          "id": new FormControl(id),
+          "description": new FormControl(params['description'], [Validators.required]),
+          "amount": new FormControl(params['amount'], [Validators.required]),
+          "unitPrice": new FormControl(params['unitPrice'], [Validators.required])
+        });
+      }));
+    } else {
+      this.productForm = new FormGroup({
+        "id": new FormControl(null),
+        "description": new FormControl(null, [Validators.required]),
+        "amount": new FormControl(null, [Validators.required]),
+        "unitPrice": new FormControl(null, [Validators.required])
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  submitForm(): void {
+    if (this.productForm.valid) {
+      this.product.Id = this.productForm.value.id;
+      this.product.Description = this.productForm.value.description;
+      this.product.Amount = this.productForm.value.amount;
+      this.product.UnitPrice = this.productForm.value.unitPrice;
+
+      if (this.product.Id) {
+        this.subscription.add(this.productService.updateProduct(this.product).subscribe(_ => this.router.navigate(['/products'])));
+      } else {
+        this.subscription.add(this.productService.addProduct(this.product).subscribe(_ => this.router.navigate(['/products'])));
+      }
     }
   }
 
