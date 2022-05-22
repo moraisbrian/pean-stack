@@ -14,9 +14,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private productService: ProductsService, private router: Router) { }
 
-  product: Product = new Product();
   subscription: Subscription = new Subscription();
-
   productForm!: FormGroup;
 
   ngOnInit(): void {
@@ -46,15 +44,16 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.productForm.valid) {
-      this.product.Id = this.productForm.value.id;
-      this.product.Description = this.productForm.value.description;
-      this.product.Amount = this.productForm.value.amount;
-      this.product.UnitPrice = this.productForm.value.unitPrice;
+      const product: Product = new Product();
+      product.Id = this.productForm.value.id;
+      product.Description = this.productForm.value.description;
+      product.Amount = this.productForm.value.amount;
+      product.UnitPrice = this.productForm.value.unitPrice;
 
-      if (this.product.Id) {
-        this.subscription.add(this.productService.updateProduct(this.product).subscribe(_ => this.router.navigate(['/products'])));
+      if (product.Id) {
+        this.subscription.add(this.productService.updateProduct(product).subscribe(_ => this.router.navigate(['/products'])));
       } else {
-        this.subscription.add(this.productService.addProduct(this.product).subscribe(_ => this.router.navigate(['/products'])));
+        this.subscription.add(this.productService.addProduct(product).subscribe(_ => this.router.navigate(['/products'])));
       }
     }
   }

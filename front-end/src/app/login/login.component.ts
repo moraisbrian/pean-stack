@@ -30,6 +30,12 @@ export class LoginComponent implements OnInit {
     return false;
   }
 
+  onKeyUp(event: KeyboardEvent): void {
+    if (this.emailAndPasswordIsValid() && event.key === 'Enter') {
+      this.authenticate();
+    }
+  }
+
   authenticate(): void {
     this.authService.authenticate(this.email, this.password)
       .then((result: any) => {
@@ -38,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/products']);
         }
       })
-      .catch((err: any) => {
+      .catch(_ => {
         this.email = '';
         this.password = '';
         this.showModal.emit(true);
