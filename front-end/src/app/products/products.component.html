@@ -1,5 +1,7 @@
 <app-information-dialog title="Atenção" [showModal]="showInformationModal" [content]="infoMessage"></app-information-dialog>
 <app-question-dialog title="Atenção" content="Deseja realmente deletar o produto?" [showModal]="showQuestionModal" (confirmAction)="confirmDelete($event)"></app-question-dialog>
+<button class="btn btn-primary" (click)="addProduct()">Adicionar</button>
+<hr>
 <table class="table">
     <thead>
         <tr>

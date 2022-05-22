@@ -4,10 +4,12 @@ import { ProductsComponent } from './products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsService } from './products.service';
 import { DialogModule } from '../dialog/dialog.module';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    AddProductComponent
   ],
   imports: [
     ProductsRoutingModule,

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ProductsService } from './products.service';
@@ -10,7 +11,7 @@ import { ProductsService } from './products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService, private router: Router) { }
 
   products$: Observable<Product[]> = new Observable<Product[]>();
   showQuestionModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -29,13 +30,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   editProduct(event: Event): void {
     const productId = (<HTMLButtonElement>event.target).value;
-    console.log(productId);
+    this.router.navigate(['/products/update', productId]);
   }
 
   deleteProduct(event: Event): void {
     const productId = (<HTMLButtonElement>event.target).value;
     this.showQuestionModal.emit(true);
     this.productToDelete = productId;
+  }
+
+  addProduct(): void {
+    this.router.navigate(['/products/add']);
   }
 
   confirmDelete(event: boolean): void {
